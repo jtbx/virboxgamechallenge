@@ -85,19 +85,19 @@ int main(string[] args)
 				gamebox.redraw(rows / 2, cols / 2, rows / 4, cols / 4);
 				break;
 			case Key.UP:
-			case 'k':
+			case 'w':
 				player.y = player.y - 1;
 				break;
 			case Key.DOWN:
-			case 'j':
+			case 's':
 				player.y = player.y + 1;
 				break;
 			case Key.LEFT:
-			case 'h':
+			case 'a':
 				player.x = player.x - 1;
 				break;
 			case Key.RIGHT:
-			case 'l':
+			case 'd':
 				player.x = player.x + 1;
 				break;
 			default:
