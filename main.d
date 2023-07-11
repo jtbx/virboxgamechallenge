@@ -78,9 +78,6 @@ int main(string[] args)
 	player = new Entity(gamebox.win, 2, 2, '@');
 
 	do {
-		cs.mvprintw(1, 1, "Player y, x: %d,%d", player.y, player.x);
-		cs.mvprintw(2, 1, "Start/end y: %d,%d", gamebox.starty, gamebox.endy);
-		cs.mvprintw(3, 1, "Start/end x: %d,%d", gamebox.startx, gamebox.endx);
 		ch = cs.wgetch(gamebox.win);
 		switch (ch) {
 			case Key.RESIZE:

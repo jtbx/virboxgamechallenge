@@ -28,22 +28,30 @@ class Entity
 	{
 		return _y;
 	}
-	@property y(int newVal) nothrow @nogc
+	@property void y(int newVal) nothrow @nogc
 	{
-		cs.mvwaddch(_win, _y, _x, ' ');
+		/* if the space is occupied, return */
+		if (cs.mvwinch(_win, newVal, _x) != ' ') {
+			return;
+		}
+		cs.mvwaddch(_win, _y, _x, ' '); /* remove character */
 		_y = newVal;
-		cs.mvwaddch(_win, _y, _x, ch);
+		cs.mvwaddch(_win, _y, _x, ch); /* add character */
 		cs.wrefresh(_win);
 	}
 	@property x() const nothrow pure @nogc @safe
 	{
 		return _x;
 	}
-	@property x(int newVal) nothrow @nogc
+	@property void x(int newVal) nothrow @nogc
 	{
-		cs.mvwaddch(_win, y, x, ' ');
+		/* if the space is occupied, return */
+		if (cs.mvwinch(_win, _y, newVal) != ' ') {
+			return;
+		}
+		cs.mvwaddch(_win, _y, _x, ' '); /* remove character */
 		_x = newVal;
-		cs.mvwaddch(_win, y, x, ch);
+		cs.mvwaddch(_win, _y, _x, ch); /* add character */
 		cs.wrefresh(_win);
 	}
 }
