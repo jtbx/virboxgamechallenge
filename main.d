@@ -4,6 +4,7 @@ import std.math.rounding : ceil;
 import std.conv   : to;
 import std.format : format;
 import std.meta   : Alias;
+import std.string : strip;
 import std.traits : isSomeString;
 
 /* Import curses into the "cs" namespace */
@@ -27,10 +28,10 @@ enum MINCOLS = 70;
 
 int main(string[] args)
 {	
-	int ch;
+	int ch, tmp;
 	int rows, cols;
-	Box gamebox;
-	Box textbox;
+	Box    game;
+	Box    text;
 	Entity player;
 
     void panic(R, A...)(R fmt, A a)
@@ -74,15 +75,15 @@ int main(string[] args)
 
 	checkDimensions(rows, cols);
 
-	gamebox = new Box(rows / 2, cols / 2, rows / 4, cols / 4);
-	player = new Entity(gamebox.win, 2, 2, '@');
+	game = new Box(rows / 2, cols / 2, rows / 4, cols / 4);
+	player = new Entity(game.win, 2, 2, '@');
 
 	do {
-		ch = cs.wgetch(gamebox.win);
+		ch = cs.wgetch(game.win);
 		switch (ch) {
-			case Key.RESIZE:
+			case Key.RESIZE: /* on window resize */
 				checkDimensions(rows, cols);
-				gamebox.redraw(rows / 2, cols / 2, rows / 4, cols / 4);
+				game.redraw(rows / 2, cols / 2, rows / 4, cols / 4);
 				break;
 			case Key.UP:
 			case 'k':
@@ -100,16 +101,27 @@ int main(string[] args)
 			case 'l':
 				player.x = player.x + 1;
 				break;
+			case 'q': /* quit key */
+				cs.mvwprintw(game.win, 1, 1, "Are you sure you want to quit? ");
+				cs.curs_set(1);
+				tmp = cs.wgetch(game.win);
+				if (tmp == 'y' || tmp == 'Y') {
+					game.destroy();
+					text.destroy();
+					endCurses();
+					return 0;
+				} else {
+					break;
+				}
 			default:
 				break;
 		}
-		//player.y = clamp(player.y, gamebox.starty, gamebox.endy);
-		//player.x = clamp(player.x, gamebox.startx, gamebox.endx);
-		cs.wrefresh(gamebox.win);
-	} while (ch != 'q');
+		//player.y = clamp(player.y, game.starty, game.endy);
+		//player.x = clamp(player.x, game.startx, game.endx);
+		cs.wrefresh(game.win);
+	} while (ch);
 
-	gamebox.destroy();
-
+	game.destroy();
 	endCurses();
 
 	return 0;
