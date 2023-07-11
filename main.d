@@ -76,6 +76,7 @@ int main(string[] args)
 	checkDimensions(rows, cols);
 
 	game = new Box(rows / 2, cols / 2, rows / 4, cols / 4);
+	text = new Box(rows / 4, cols / 2, (rows / 2) + (rows / 4), cols / 4);
 	player = new Entity(game.win, 2, 2, '@');
 
 	do {
