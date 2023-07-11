@@ -4,7 +4,6 @@ import std.math.rounding : ceil;
 import std.conv   : to;
 import std.format : format;
 import std.meta   : Alias;
-import std.string : strip;
 import std.traits : isSomeString;
 
 /* Import curses into the "cs" namespace */
@@ -107,22 +106,27 @@ int main(string[] args)
 				player.x = player.x + 1;
 				break;
 			case 'q': /* quit key */
-				cs.mvwprintw(game.win, 1, 1, "Are you sure you want to quit? ");
-				cs.curs_set(1);
-				tmp = cs.wgetch(game.win);
+				cs.wclear(text.win);
+				text.redraw(text.height, text.width,
+                            text.starty, text.startx); /* Redraw text box */
+				cs.mvwprintw(text.win, 1, 2, "Are you sure you want to quit? ");
+				cs.curs_set(1); /* show cursor */
+				tmp = cs.wgetch(text.win);
 				if (tmp == 'y' || tmp == 'Y') {
 					game.destroy();
 					text.destroy();
 					endCurses();
 					return 0;
 				} else {
+					cs.curs_set(0);
+					cs.wclear(text.win);
+					text.redraw(text.height, text.width,
+                                text.starty, text.startx);
 					break;
 				}
 			default:
 				break;
 		}
-		//player.y = clamp(player.y, game.starty, game.endy);
-		//player.x = clamp(player.x, game.startx, game.endx);
 		cs.wrefresh(game.win);
 	} while (ch);
 

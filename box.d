@@ -10,6 +10,7 @@ class Box
 {
 	int starty, startx;
 	int endy, endx;
+	int height, width;
 	Window win;
 
 	this(int height, int width, int starty, int startx) nothrow @nogc
@@ -18,6 +19,8 @@ class Box
 		this.startx = startx;
 		this.endy = starty + height;
 		this.endx = startx + width;
+		this.height = height;
+		this.width = width;
 		/* create window */
 		win = cs.newwin(height, width, starty, startx);
 		cs.box(win, 0, 0); /* make a box border */
@@ -41,6 +44,8 @@ class Box
 		this.startx = startx;
 		this.endy = starty + height;
 		this.endx = startx + width;
+		this.height = height;
+		this.width = width;
 		/* create window */
 		win = cs.newwin(height, width, starty, startx);
 		cs.box(win, 0, 0); /* make a box border */
