@@ -86,18 +86,22 @@ int main(string[] args)
 				break;
 			case Key.UP:
 			case 'w':
+			case 'k':
 				player.y = player.y - 1;
 				break;
 			case Key.DOWN:
 			case 's':
+			case 'j':
 				player.y = player.y + 1;
 				break;
 			case Key.LEFT:
 			case 'a':
+			case 'h':
 				player.x = player.x - 1;
 				break;
 			case Key.RIGHT:
 			case 'd':
+			case 'l':
 				player.x = player.x + 1;
 				break;
 			default:
