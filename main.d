@@ -109,7 +109,7 @@ int main(string[] args)
 				cs.wclear(text.win);
 				text.redraw(text.height, text.width,
                             text.starty, text.startx); /* Redraw text box */
-				cs.mvwprintw(text.win, 1, 2, "Are you sure you want to quit? ");
+				cs.mvwprintw(text.win, 1, 2, "Are you sure you want to quit? (Press Y to confirm.)");
 				cs.curs_set(1); /* show cursor */
 				tmp = cs.wgetch(text.win);
 				if (tmp == 'y' || tmp == 'Y') {
