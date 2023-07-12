@@ -33,10 +33,17 @@ class Box
 		cs.delwin(win);
 	}
 
+	void clear()
+	{
+		cs.wclear(win); /* Clear window */
+		redraw(height, width,
+               starty, startx); /* Redraw text box */
+	}
+
 	void redraw(int height, int width, int starty, int startx) nothrow @nogc
 	{
 		/* delete window */
-		cs.wborder(win, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+		cs.wclear(win);
 		cs.wrefresh(win);
 		cs.delwin(win);
 		/* set new positions */
@@ -50,6 +57,10 @@ class Box
 		win = cs.newwin(height, width, starty, startx);
 		cs.box(win, 0, 0); /* make a box border */
 		cs.wrefresh(win);
+	}
+	void redraw() nothrow @nogc
+	{
+		redraw(height, width, starty, startx);
 	}
 }
 
