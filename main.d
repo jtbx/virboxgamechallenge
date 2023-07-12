@@ -98,7 +98,7 @@ int main(string[] args)
 		/* if the screen state has not been dumped
 		 * AND the terminal is too small: */
 		if (!dumped && (rows < MINROWS || cols < MINCOLS)) {
-			cs.(DUMPFILE); /* dump screen to file */
+			cs.scr_dump(DUMPFILE); /* dump screen to file */
 			dumped = true;
 			cs.clear(); /* clear entire screen */
 			cs.attron(ColourPair(1)); /* enable white-on-red palette */
