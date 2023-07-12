@@ -190,7 +190,7 @@ int main(string[] args)
 				break;
 			case 'q': /* quit key */
 				text.clear();
-				cs.mvwprintw(text.win, 1, 2, "Are you sure you want to quit? ");
+				cs.mvwprintw(text.win, 1, 2, "Are you sure you want to quit? [Y/N]");
 				cs.curs_set(1); /* show cursor */
 				tmp = cs.wgetch(text.win);
 				if (tmp == 'y' || tmp == 'Y') {
