@@ -37,6 +37,7 @@
 module deimos.curses;
 
 extern (C):
+public:
 
 /*
  The symbols beginning NCURSES_ or USE_ are configuration choices.
@@ -66,21 +67,21 @@ extern (C):
  NCURSES_REENTRANT
  */
 
-enum CURSES = 1;
-enum CURSES_H = 1;
+public enum CURSES = 1;
+public enum CURSES_H = 1;
 
 /* These are defined only in curses.h, and are used for conditional compiles */
-enum NCURSES_VERSION_MAJOR = 6;
-enum NCURSES_VERSION_MINOR = 3;
-enum NCURSES_VERSION_PATCH = 20211021;
+public enum NCURSES_VERSION_MAJOR = 6;
+public enum NCURSES_VERSION_MINOR = 3;
+public enum NCURSES_VERSION_PATCH = 20211021;
 
 /* This is defined in more than one ncurses header, for identification */
-enum NCURSES_VERSION = "6.3";
+public enum NCURSES_VERSION = "6.3";
 
 /*
  * Identify the mouse encoding version.
  */
-enum NCURSES_MOUSE_VERSION = 2;
+public enum NCURSES_MOUSE_VERSION = 2;
 
 /*
  * Definitions to facilitate DLL's.
@@ -124,10 +125,10 @@ alias NCURSES_PAIRS_T = short;
  * Definitions used to make WINDOW and similar structs opaque.
  */
 version (NCURSES_INTERNALS) {} else {
-enum NCURSES_OPAQUE       = 0;
-enum NCURSES_OPAQUE_FORM  = 0;
-enum NCURSES_OPAQUE_MENU  = 0;
-enum NCURSES_OPAQUE_PANEL = 0;
+public enum NCURSES_OPAQUE       = 0;
+public enum NCURSES_OPAQUE_FORM  = 0;
+public enum NCURSES_OPAQUE_MENU  = 0;
+public enum NCURSES_OPAQUE_PANEL = 0;
 }
 
 /*
@@ -136,7 +137,7 @@ enum NCURSES_OPAQUE_PANEL = 0;
  * be shared across development packages for ncursesw in both ABIs.
  */
 static if (!is(typeof(NCURSES_WATTR_MACROS))) {
-enum NCURSES_WATTR_MACROS = 0;
+public enum NCURSES_WATTR_MACROS = 0;
 }
 
 /*
@@ -151,14 +152,14 @@ enum NCURSES_WATTR_MACROS = 0;
  */
 // #undef NCURSES_BROKEN_LINKER
 version (none) {
-enum NCURSES_BROKEN_LINKER = 1;
+public enum NCURSES_BROKEN_LINKER = 1;
 }
 
 /*
  * Control whether bindings for interop support are added.
  */
 // #undef  NCURSES_INTEROP_FUNCS
-enum NCURSES_INTEROP_FUNCS = 1;
+public enum NCURSES_INTEROP_FUNCS = 1;
 
 /*
  * The internal type used for window dimensions.
@@ -170,7 +171,7 @@ alias NCURSES_SIZE_T = short;
  * Control whether tparm() supports varargs or fixed-parameter list.
  */
 // #undef NCURSES_TPARM_VARARGS
-enum NCURSES_TPARM_VARARGS = 1;
+public enum NCURSES_TPARM_VARARGS = 1;
 
 /*
  * Control type used for tparm's arguments.  While X/Open equates c_long and
@@ -184,7 +185,7 @@ alias NCURSES_TPARM_ARG = intptr_t;
  * characters.
  */
 // #undef NCURSES_WCWIDTH_GRAPHICS
-enum NCURSES_WCWIDTH_GRAPHICS = 1;
+public enum NCURSES_WCWIDTH_GRAPHICS = 1;
 
 /*
  * NCURSES_CH_T is used in building the library, but not used otherwise in
@@ -211,7 +212,7 @@ import core.stdc.stdio;
  * test macros, define it at this point if the standard feature test macros
  * indicate that it should be defined.
  */
-enum NCURSES_WIDECHAR = 1; // D port note: we always set this to 1
+public enum NCURSES_WIDECHAR = 1; // D port note: we always set this to 1
 
 import core.stdc.stdarg;        /* we need va_list */
 static if (NCURSES_WIDECHAR) {
@@ -230,9 +231,9 @@ import core.stdc.stddef;        /* we want wchar_t */
  * from either C or C++.
  */
 
-enum TRUE    = 1;
+public enum TRUE    = 1;
 
-enum FALSE   = 0;
+public enum FALSE   = 0;
 
 alias NCURSES_BOOL = bool;
 
@@ -242,37 +243,37 @@ auto  NCURSES_OK_ADDR(p)(p p) { pragma(inline, true); return (null != cast(const
  * X/Open attributes.  In the ncurses implementation, they are identical to the
  * A_ attributes.
  */
-enum WA_ATTRIBUTES  = A_ATTRIBUTES;
-enum WA_NORMAL      = A_NORMAL;
-enum WA_STANDOUT    = A_STANDOUT;
-enum WA_UNDERLINE   = A_UNDERLINE;
-enum WA_REVERSE     = A_REVERSE;
-enum WA_BLINK       = A_BLINK;
-enum WA_DIM         = A_DIM;
-enum WA_BOLD        = A_BOLD;
-enum WA_ALTCHARSET  = A_ALTCHARSET;
-enum WA_INVIS       = A_INVIS;
-enum WA_PROTECT     = A_PROTECT;
-enum WA_HORIZONTAL  = A_HORIZONTAL;
-enum WA_LEFT        = A_LEFT;
-enum WA_LOW         = A_LOW;
-enum WA_RIGHT       = A_RIGHT;
-enum WA_TOP         = A_TOP;
-enum WA_VERTICAL    = A_VERTICAL;
+public enum WA_ATTRIBUTES  = A_ATTRIBUTES;
+public enum WA_NORMAL      = A_NORMAL;
+public enum WA_STANDOUT    = A_STANDOUT;
+public enum WA_UNDERLINE   = A_UNDERLINE;
+public enum WA_REVERSE     = A_REVERSE;
+public enum WA_BLINK       = A_BLINK;
+public enum WA_DIM         = A_DIM;
+public enum WA_BOLD        = A_BOLD;
+public enum WA_ALTCHARSET  = A_ALTCHARSET;
+public enum WA_INVIS       = A_INVIS;
+public enum WA_PROTECT     = A_PROTECT;
+public enum WA_HORIZONTAL  = A_HORIZONTAL;
+public enum WA_LEFT        = A_LEFT;
+public enum WA_LOW         = A_LOW;
+public enum WA_RIGHT       = A_RIGHT;
+public enum WA_TOP         = A_TOP;
+public enum WA_VERTICAL    = A_VERTICAL;
 
 version (all) {
-enum WA_ITALIC  = A_ITALIC      /* ncurses extension */;
+public enum WA_ITALIC  = A_ITALIC      /* ncurses extension */;
 }
 
 /* colors */
-enum COLOR_BLACK     = 0;
-enum COLOR_RED       = 1;
-enum COLOR_GREEN     = 2;
-enum COLOR_YELLOW    = 3;
-enum COLOR_BLUE      = 4;
-enum COLOR_MAGENTA   = 5;
-enum COLOR_CYAN      = 6;
-enum COLOR_WHITE     = 7;
+public enum COLOR_BLACK     = 0;
+public enum COLOR_RED       = 1;
+public enum COLOR_GREEN     = 2;
+public enum COLOR_YELLOW    = 3;
+public enum COLOR_BLUE      = 4;
+public enum COLOR_MAGENTA   = 5;
+public enum COLOR_CYAN      = 6;
+public enum COLOR_WHITE     = 7;
 
 /* line graphics */
 
@@ -338,30 +339,30 @@ extern nothrow @nogc __gshared chtype[256] acs_map;
 @property auto ACS_SBSB        () { pragma(inline, true); return ACS_VLINE; }
 @property auto ACS_SSSS        () { pragma(inline, true); return ACS_PLUS; }
 
-enum ERR     = (-1);
+public enum ERR     = (-1);
 
-enum OK      = (0);
+public enum OK      = (0);
 
 /* values for the _flags member */
-enum _SUBWIN         = 0x01;    /* is this a sub-window? */
-enum _ENDLINE        = 0x02;    /* is the window flush right? */
-enum _FULLWIN        = 0x04;    /* is the window full-screen? */
-enum _SCROLLWIN      = 0x08;    /* bottom edge is at screen bottom? */
-enum _ISPAD          = 0x10;    /* is this window a pad? */
-enum _HASMOVED       = 0x20;    /* has cursor moved since last refresh? */
-enum _WRAPPED        = 0x40;    /* cursor was just wrappped */
+public enum _SUBWIN         = 0x01;    /* is this a sub-window? */
+public enum _ENDLINE        = 0x02;    /* is the window flush right? */
+public enum _FULLWIN        = 0x04;    /* is the window full-screen? */
+public enum _SCROLLWIN      = 0x08;    /* bottom edge is at screen bottom? */
+public enum _ISPAD          = 0x10;    /* is this window a pad? */
+public enum _HASMOVED       = 0x20;    /* has cursor moved since last refresh? */
+public enum _WRAPPED        = 0x40;    /* cursor was just wrappped */
 
 /*
  * this value is used in the firstchar and lastchar fields to mark
  * unchanged lines
  */
-enum _NOCHANGE       = -1;
+public enum _NOCHANGE       = -1;
 
 /*
  * this value is used in the oldindex field to mark lines created by insertions
  * and scrolls.
  */
-enum _NEWINDEX       = -1;
+public enum _NEWINDEX       = -1;
 
 struct screen;
 alias SCREEN = screen;
@@ -390,7 +391,7 @@ alias wint_t1 = uint;
  * (spacing and nonspacing) do not fill the array, a null L'\0' follows.
  * Otherwise, a null is assumed to follow when extracting via getcchar().
  */
-enum CCHARW_MAX      = 5;
+public enum CCHARW_MAX      = 5;
 struct cchar_t
 {
     attr_t      attr;
@@ -399,7 +400,7 @@ version (all) {
     int         ext_color;      /* color pair, must be more than 16-bits */
 }
 }
-enum NCURSES_EXT_COLORS = 20211021;
+public enum NCURSES_EXT_COLORS = 20211021;
 
 } /* NCURSES_WIDECHAR */
 
@@ -794,7 +795,7 @@ auto vid_attr(A, PAIR, OPTS)(A a,PAIR pair,OPTS opts) { pragma(inline, true); re
  */
 version (all) {
 //#undef  NCURSES_EXT_FUNCS
-enum NCURSES_EXT_FUNCS = 20211021;
+public enum NCURSES_EXT_FUNCS = 20211021;
 alias NCURSES_WINDOW_CB = int function(WINDOW *, void *);
 alias NCURSES_SCREEN_CB = int function (SCREEN *, void *);
 extern nothrow @nogc bool is_term_resized (int, int);
@@ -856,7 +857,7 @@ auto curses_version()() { pragma(inline, true); return NCURSES_VERSION; }
  */
 version (all) {
 //#undef  NCURSES_SP_FUNCS
-enum NCURSES_SP_FUNCS = 20211021;
+public enum NCURSES_SP_FUNCS = 20211021;
 string NCURSES_SP_NAME(string name) { pragma(inline, true); return name ~ "_sp"; }
 
 /* Define the sp-funcs helper function */
@@ -965,38 +966,38 @@ extern nothrow @nogc int use_legacy_coding_sp (SCREEN*, int);   /* implemented:E
 }
 } else {
 //#undef  NCURSES_SP_FUNCS
-enum NCURSES_SP_FUNCS = 0;
+public enum NCURSES_SP_FUNCS = 0;
 alias NCURSES_SP_NAME(string name) = mixin(name ~ "_sp");
 alias NCURSES_SP_OUTC = NCURSES_OUTC;
 }
 
 /* attributes */
 
-enum NCURSES_ATTR_SHIFT       = 8;
+public enum NCURSES_ATTR_SHIFT       = 8;
 auto NCURSES_BITS(Mask, Shift)(Mask mask,Shift shift) { pragma(inline, true); return (cast(chtype)(mask)) << ((shift) + NCURSES_ATTR_SHIFT); }
 
-enum A_NORMAL        = (1U - 1U);
-enum A_ATTRIBUTES    = NCURSES_BITS(~(1U - 1U),0);
-enum A_CHARTEXT      = (NCURSES_BITS(1U,0) - 1U);
-enum A_COLOR         = NCURSES_BITS(((1U) << 8) - 1U,0);
-enum A_STANDOUT      = NCURSES_BITS(1U,8);
-enum A_UNDERLINE     = NCURSES_BITS(1U,9);
-enum A_REVERSE       = NCURSES_BITS(1U,10);
-enum A_BLINK         = NCURSES_BITS(1U,11);
-enum A_DIM           = NCURSES_BITS(1U,12);
-enum A_BOLD          = NCURSES_BITS(1U,13);
-enum A_ALTCHARSET    = NCURSES_BITS(1U,14);
-enum A_INVIS         = NCURSES_BITS(1U,15);
-enum A_PROTECT       = NCURSES_BITS(1U,16);
-enum A_HORIZONTAL    = NCURSES_BITS(1U,17);
-enum A_LEFT          = NCURSES_BITS(1U,18);
-enum A_LOW           = NCURSES_BITS(1U,19);
-enum A_RIGHT         = NCURSES_BITS(1U,20);
-enum A_TOP           = NCURSES_BITS(1U,21);
-enum A_VERTICAL      = NCURSES_BITS(1U,22);
+public enum A_NORMAL        = (1U - 1U);
+public enum A_ATTRIBUTES    = NCURSES_BITS(~(1U - 1U),0);
+public enum A_CHARTEXT      = (NCURSES_BITS(1U,0) - 1U);
+public enum A_COLOR         = NCURSES_BITS(((1U) << 8) - 1U,0);
+public enum A_STANDOUT      = NCURSES_BITS(1U,8);
+public enum A_UNDERLINE     = NCURSES_BITS(1U,9);
+public enum A_REVERSE       = NCURSES_BITS(1U,10);
+public enum A_BLINK         = NCURSES_BITS(1U,11);
+public enum A_DIM           = NCURSES_BITS(1U,12);
+public enum A_BOLD          = NCURSES_BITS(1U,13);
+public enum A_ALTCHARSET    = NCURSES_BITS(1U,14);
+public enum A_INVIS         = NCURSES_BITS(1U,15);
+public enum A_PROTECT       = NCURSES_BITS(1U,16);
+public enum A_HORIZONTAL    = NCURSES_BITS(1U,17);
+public enum A_LEFT          = NCURSES_BITS(1U,18);
+public enum A_LOW           = NCURSES_BITS(1U,19);
+public enum A_RIGHT         = NCURSES_BITS(1U,20);
+public enum A_TOP           = NCURSES_BITS(1U,21);
+public enum A_VERTICAL      = NCURSES_BITS(1U,22);
 
 version (all) {
-enum A_ITALIC        = NCURSES_BITS(1U,23);     /* ncurses extension */
+public enum A_ITALIC        = NCURSES_BITS(1U,23);     /* ncurses extension */
 }
 
 /*
@@ -1471,7 +1472,7 @@ public enum KEY_MAX         = /*0777*/ 0x1ff;            /* Maximum key value is
  * This file is part of ncurses, designed to be appended after curses.h.in
  * (see that file for the relevant copyright).
  */
-enum _XOPEN_CURSES = 1;
+public enum _XOPEN_CURSES = 1;
 
 static if (NCURSES_WIDECHAR) {
 
@@ -1794,37 +1795,37 @@ auto  NCURSES_MOUSE_MASK(b,m)(b b,m m) { pragma(inline, true); return ((m) << ((
 auto  NCURSES_MOUSE_MASK(b,m)(b b,m m) { pragma(inline, true); return ((m) << (((b) - 1) * 6)); }
 }
 
-enum NCURSES_BUTTON_RELEASED = /*001*/ 0x01L;
-enum NCURSES_BUTTON_PRESSED  = /*002*/ 0x02L;
-enum NCURSES_BUTTON_CLICKED  = /*004*/ 0x04L;
-enum NCURSES_DOUBLE_CLICKED  = /*010*/ 0x08L;
-enum NCURSES_TRIPLE_CLICKED  = /*020*/ 0x10L;
-enum NCURSES_RESERVED_EVENT  = /*040*/ 0x20L;
+public enum NCURSES_BUTTON_RELEASED = /*001*/ 0x01L;
+public enum NCURSES_BUTTON_PRESSED  = /*002*/ 0x02L;
+public enum NCURSES_BUTTON_CLICKED  = /*004*/ 0x04L;
+public enum NCURSES_DOUBLE_CLICKED  = /*010*/ 0x08L;
+public enum NCURSES_TRIPLE_CLICKED  = /*020*/ 0x10L;
+public enum NCURSES_RESERVED_EVENT  = /*040*/ 0x20L;
 
 /* event masks */
-enum BUTTON1_RELEASED        = NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_RELEASED);
-enum BUTTON1_PRESSED         = NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_PRESSED);
-enum BUTTON1_CLICKED         = NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_CLICKED);
-enum BUTTON1_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(1, NCURSES_DOUBLE_CLICKED);
-enum BUTTON1_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(1, NCURSES_TRIPLE_CLICKED);
+public enum BUTTON1_RELEASED        = NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_RELEASED);
+public enum BUTTON1_PRESSED         = NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_PRESSED);
+public enum BUTTON1_CLICKED         = NCURSES_MOUSE_MASK(1, NCURSES_BUTTON_CLICKED);
+public enum BUTTON1_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(1, NCURSES_DOUBLE_CLICKED);
+public enum BUTTON1_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(1, NCURSES_TRIPLE_CLICKED);
 
-enum BUTTON2_RELEASED        = NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_RELEASED);
-enum BUTTON2_PRESSED         = NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_PRESSED);
-enum BUTTON2_CLICKED         = NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_CLICKED);
-enum BUTTON2_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(2, NCURSES_DOUBLE_CLICKED);
-enum BUTTON2_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(2, NCURSES_TRIPLE_CLICKED);
+public enum BUTTON2_RELEASED        = NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_RELEASED);
+public enum BUTTON2_PRESSED         = NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_PRESSED);
+public enum BUTTON2_CLICKED         = NCURSES_MOUSE_MASK(2, NCURSES_BUTTON_CLICKED);
+public enum BUTTON2_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(2, NCURSES_DOUBLE_CLICKED);
+public enum BUTTON2_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(2, NCURSES_TRIPLE_CLICKED);
 
-enum BUTTON3_RELEASED        = NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_RELEASED);
-enum BUTTON3_PRESSED         = NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_PRESSED);
-enum BUTTON3_CLICKED         = NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_CLICKED);
-enum BUTTON3_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(3, NCURSES_DOUBLE_CLICKED);
-enum BUTTON3_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(3, NCURSES_TRIPLE_CLICKED);
+public enum BUTTON3_RELEASED        = NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_RELEASED);
+public enum BUTTON3_PRESSED         = NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_PRESSED);
+public enum BUTTON3_CLICKED         = NCURSES_MOUSE_MASK(3, NCURSES_BUTTON_CLICKED);
+public enum BUTTON3_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(3, NCURSES_DOUBLE_CLICKED);
+public enum BUTTON3_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(3, NCURSES_TRIPLE_CLICKED);
 
-enum BUTTON4_RELEASED        = NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_RELEASED);
-enum BUTTON4_PRESSED         = NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_PRESSED);
-enum BUTTON4_CLICKED         = NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_CLICKED);
-enum BUTTON4_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(4, NCURSES_DOUBLE_CLICKED);
-enum BUTTON4_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(4, NCURSES_TRIPLE_CLICKED);
+public enum BUTTON4_RELEASED        = NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_RELEASED);
+public enum BUTTON4_PRESSED         = NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_PRESSED);
+public enum BUTTON4_CLICKED         = NCURSES_MOUSE_MASK(4, NCURSES_BUTTON_CLICKED);
+public enum BUTTON4_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(4, NCURSES_DOUBLE_CLICKED);
+public enum BUTTON4_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(4, NCURSES_TRIPLE_CLICKED);
 
 /*
  * In 32 bits the version-1 scheme does not provide enough space for a 5th
@@ -1832,32 +1833,32 @@ enum BUTTON4_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(4, NCURSES_TRIPLE_CLICKED);
  */
 static if (NCURSES_MOUSE_VERSION > 1) {
 
-enum BUTTON5_RELEASED        = NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_RELEASED);
-enum BUTTON5_PRESSED         = NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_PRESSED);
-enum BUTTON5_CLICKED         = NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_CLICKED);
-enum BUTTON5_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(5, NCURSES_DOUBLE_CLICKED);
-enum BUTTON5_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(5, NCURSES_TRIPLE_CLICKED);
+public enum BUTTON5_RELEASED        = NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_RELEASED);
+public enum BUTTON5_PRESSED         = NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_PRESSED);
+public enum BUTTON5_CLICKED         = NCURSES_MOUSE_MASK(5, NCURSES_BUTTON_CLICKED);
+public enum BUTTON5_DOUBLE_CLICKED  = NCURSES_MOUSE_MASK(5, NCURSES_DOUBLE_CLICKED);
+public enum BUTTON5_TRIPLE_CLICKED  = NCURSES_MOUSE_MASK(5, NCURSES_TRIPLE_CLICKED);
 
-enum BUTTON_CTRL             = NCURSES_MOUSE_MASK(6, /*001*/ 0x01L);
-enum BUTTON_SHIFT            = NCURSES_MOUSE_MASK(6, /*002*/ 0x02L);
-enum BUTTON_ALT              = NCURSES_MOUSE_MASK(6, /*004*/ 0x04L);
-enum REPORT_MOUSE_POSITION   = NCURSES_MOUSE_MASK(6, /*010*/ 0x08L);
+public enum BUTTON_CTRL             = NCURSES_MOUSE_MASK(6, /*001*/ 0x01L);
+public enum BUTTON_SHIFT            = NCURSES_MOUSE_MASK(6, /*002*/ 0x02L);
+public enum BUTTON_ALT              = NCURSES_MOUSE_MASK(6, /*004*/ 0x04L);
+public enum REPORT_MOUSE_POSITION   = NCURSES_MOUSE_MASK(6, /*010*/ 0x08L);
 
 } else {
 
-enum BUTTON1_RESERVED_EVENT  = NCURSES_MOUSE_MASK(1, NCURSES_RESERVED_EVENT);
-enum BUTTON2_RESERVED_EVENT  = NCURSES_MOUSE_MASK(2, NCURSES_RESERVED_EVENT);
-enum BUTTON3_RESERVED_EVENT  = NCURSES_MOUSE_MASK(3, NCURSES_RESERVED_EVENT);
-enum BUTTON4_RESERVED_EVENT  = NCURSES_MOUSE_MASK(4, NCURSES_RESERVED_EVENT);
+public enum BUTTON1_RESERVED_EVENT  = NCURSES_MOUSE_MASK(1, NCURSES_RESERVED_EVENT);
+public enum BUTTON2_RESERVED_EVENT  = NCURSES_MOUSE_MASK(2, NCURSES_RESERVED_EVENT);
+public enum BUTTON3_RESERVED_EVENT  = NCURSES_MOUSE_MASK(3, NCURSES_RESERVED_EVENT);
+public enum BUTTON4_RESERVED_EVENT  = NCURSES_MOUSE_MASK(4, NCURSES_RESERVED_EVENT);
 
-enum BUTTON_CTRL             = NCURSES_MOUSE_MASK(5, /*001*/ 0x01L);
-enum BUTTON_SHIFT            = NCURSES_MOUSE_MASK(5, /*002*/ 0x02L);
-enum BUTTON_ALT              = NCURSES_MOUSE_MASK(5, /*004*/ 0x04L);
-enum REPORT_MOUSE_POSITION   = NCURSES_MOUSE_MASK(5, /*010*/ 0x08L);
+public enum BUTTON_CTRL             = NCURSES_MOUSE_MASK(5, /*001*/ 0x01L);
+public enum BUTTON_SHIFT            = NCURSES_MOUSE_MASK(5, /*002*/ 0x02L);
+public enum BUTTON_ALT              = NCURSES_MOUSE_MASK(5, /*004*/ 0x04L);
+public enum REPORT_MOUSE_POSITION   = NCURSES_MOUSE_MASK(5, /*010*/ 0x08L);
 
 }
 
-enum ALL_MOUSE_EVENTS        = (REPORT_MOUSE_POSITION - 1);
+public enum ALL_MOUSE_EVENTS        = (REPORT_MOUSE_POSITION - 1);
 
 /* macros to extract single event-bits from masks */
 auto  BUTTON_RELEASE(e, x)(e e, x x)            { pragma(inline, true); return ((e) & NCURSES_MOUSE_MASK(x, /*001*/ 0x01)); }
@@ -1926,32 +1927,32 @@ deprecated("use curses_trace") extern nothrow @nogc NCURSES_EXPORT!(void) trace 
 extern nothrow @nogc NCURSES_EXPORT!(uint) curses_trace (const(uint));
 
 /* trace masks */
-enum TRACE_DISABLE   = 0x0000;  /* turn off tracing */
-enum TRACE_TIMES     = 0x0001;  /* trace user and system times of updates */
-enum TRACE_TPUTS     = 0x0002;  /* trace tputs calls */
-enum TRACE_UPDATE    = 0x0004;  /* trace update actions, old & new screens */
-enum TRACE_MOVE      = 0x0008;  /* trace cursor moves and scrolls */
-enum TRACE_CHARPUT   = 0x0010;  /* trace all character outputs */
-enum TRACE_ORDINARY  = 0x001F;  /* trace all update actions */
-enum TRACE_CALLS     = 0x0020;  /* trace all curses calls */
-enum TRACE_VIRTPUT   = 0x0040;  /* trace virtual character puts */
-enum TRACE_IEVENT    = 0x0080;  /* trace low-level input processing */
-enum TRACE_BITS      = 0x0100;  /* trace state of TTY control bits */
-enum TRACE_ICALLS    = 0x0200;  /* trace internal/nested calls */
-enum TRACE_CCALLS    = 0x0400;  /* trace per-character calls */
-enum TRACE_DATABASE  = 0x0800;  /* trace read/write of terminfo/termcap data */
-enum TRACE_ATTRS     = 0x1000;  /* trace attribute updates */
+public enum TRACE_DISABLE   = 0x0000;  /* turn off tracing */
+public enum TRACE_TIMES     = 0x0001;  /* trace user and system times of updates */
+public enum TRACE_TPUTS     = 0x0002;  /* trace tputs calls */
+public enum TRACE_UPDATE    = 0x0004;  /* trace update actions, old & new screens */
+public enum TRACE_MOVE      = 0x0008;  /* trace cursor moves and scrolls */
+public enum TRACE_CHARPUT   = 0x0010;  /* trace all character outputs */
+public enum TRACE_ORDINARY  = 0x001F;  /* trace all update actions */
+public enum TRACE_CALLS     = 0x0020;  /* trace all curses calls */
+public enum TRACE_VIRTPUT   = 0x0040;  /* trace virtual character puts */
+public enum TRACE_IEVENT    = 0x0080;  /* trace low-level input processing */
+public enum TRACE_BITS      = 0x0100;  /* trace state of TTY control bits */
+public enum TRACE_ICALLS    = 0x0200;  /* trace internal/nested calls */
+public enum TRACE_CCALLS    = 0x0400;  /* trace per-character calls */
+public enum TRACE_DATABASE  = 0x0800;  /* trace read/write of terminfo/termcap data */
+public enum TRACE_ATTRS     = 0x1000;  /* trace attribute updates */
 
-enum TRACE_SHIFT     = 13;      /* number of bits in the trace masks */
-enum TRACE_MAXIMUM   = ((1 << TRACE_SHIFT) - 1); /* maximum trace level */
+public enum TRACE_SHIFT     = 13;      /* number of bits in the trace masks */
+public enum TRACE_MAXIMUM   = ((1 << TRACE_SHIFT) - 1); /* maximum trace level */
 
 // #if defined(TRACE) || defined(NCURSES_TEST)
 extern NCURSES_EXPORT_VAR!(int) _nc_optimize_enable;              /* enable optimizations */
 extern nothrow @nogc NCURSES_EXPORT!(const(char) *) _nc_visbuf (const(char) *);
-enum OPTIMIZE_MVCUR          = 0x01;    /* cursor movement optimization */
-enum OPTIMIZE_HASHMAP        = 0x02;    /* diff hashing to detect scrolls */
-enum OPTIMIZE_SCROLL         = 0x04;    /* scroll optimization */
-enum OPTIMIZE_ALL            = 0xff;    /* enable all optimizations (dflt) */
+public enum OPTIMIZE_MVCUR          = 0x01;    /* cursor movement optimization */
+public enum OPTIMIZE_HASHMAP        = 0x02;    /* diff hashing to detect scrolls */
+public enum OPTIMIZE_SCROLL         = 0x04;    /* scroll optimization */
+public enum OPTIMIZE_ALL            = 0xff;    /* enable all optimizations (dflt) */
 // #endif
 
 extern nothrow @nogc /*GCC_NORETURN*/ NCURSES_EXPORT!(void) exit_curses (int);
