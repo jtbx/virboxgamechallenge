@@ -39,7 +39,7 @@ enum Colour
 }
 
 /* Minimum required terminal size */
-enum MINROWS = 30;
+enum MINROWS = 28;
 enum MINCOLS = 82;
 
 /* Size and position of UI elements */
@@ -83,24 +83,26 @@ int main(string[] args)
 		}
 	}
 
-	void refreshAll() nothrow @nogc
-	{
-		cs.refresh();
-		cs.wrefresh(game.win);
-		cs.wrefresh(text.win);
-	}
-
 	void checkDimensions()
 	{
 		int rows, cols;
 
-		cs.getmaxyx(stdscr, rows, cols); /* get terminal size */
+		cs.getmaxyx(cs.stdscr, rows, cols); /* get terminal size */
 		/* if the screen state has not been dumped
 		 * AND the terminal is too small: */
 		if (!dumped && (rows < MINROWS || cols < MINCOLS)) {
 			cs.scr_dump(DUMPFILE); /* dump screen to file */
 			dumped = true;
-			cs.clear(); /* clear entire screen */
+			cs.attron(ColourPair(1)); /* enable white-on-red palette */
+			cs.mvprintw(0, 0, "terminal size too small (%d x %d)", cols, rows);
+			cs.mvprintw(1, 0, "must be at least %d columns by %d rows",
+				MINCOLS, MINROWS);
+			cs.attroff(ColourPair(1)); /* disable palette */
+			cs.refresh();
+		/* else, if the screen state HAS been dumped
+		   AND the temrinal is still too small */
+		} else if (dumped && (rows < MINROWS || cols < MINCOLS)) {
+			/* print the message again */
 			cs.attron(ColourPair(1)); /* enable white-on-red palette */
 			cs.mvprintw(0, 0, "terminal size too small (%d x %d)", cols, rows);
 			cs.mvprintw(1, 0, "must be at least %d columns by %d rows",
@@ -110,10 +112,13 @@ int main(string[] args)
 		/* else, if the screen state HAS been dumped
 		   AND the terminal is a good size */
 		} else if (dumped && (rows >= MINROWS || cols >= MINCOLS)) {
+			cs.mvprintw(0, 0, "                                      ", cols, rows);
+			cs.mvprintw(1, 0, "                                      ",
+				MINCOLS, MINROWS);
 			/* restore screen state */
-			cs.clear(); /* clear entire screen */
+			cs.use_default_colors();
 			cs.scr_restore(DUMPFILE); /* restore screen from file */
-			refreshAll();
+			cs.refresh();
 			remove(DUMPFILE.to!string()); /* remove the dump file */
 			dumped = false;
 		}
