@@ -112,12 +112,9 @@ int main(string[] args)
 		/* else, if the screen state HAS been dumped
 		   AND the terminal is a good size */
 		} else if (dumped && (rows >= MINROWS || cols >= MINCOLS)) {
-			cs.mvprintw(0, 0, "                                      ", cols, rows);
-			cs.mvprintw(1, 0, "                                      ",
-				MINCOLS, MINROWS);
 			/* restore screen state */
-			cs.use_default_colors();
 			cs.scr_restore(DUMPFILE); /* restore screen from file */
+			cs.use_default_colors();
 			cs.refresh();
 			remove(DUMPFILE.to!string()); /* remove the dump file */
 			dumped = false;
