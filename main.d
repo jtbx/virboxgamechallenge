@@ -39,18 +39,18 @@ enum Colour
 }
 
 /* Minimum required terminal size */
-enum MINROWS = 28;
-enum MINCOLS = 82;
+ushort MINROWS = 28;
+ushort MINCOLS = 82;
 
 /* Size and position of UI elements */
-enum GAMEBOX_H = 15;
-enum GAMEBOX_W = 65;
-enum GAMEBOX_Y = 5;
-enum GAMEBOX_X = 8;
-enum TEXTBOX_H = 8;
-enum TEXTBOX_W = 65;
-enum TEXTBOX_Y = 20;
-enum TEXTBOX_X = 8;
+ushort GAMEBOX_H = 15;
+ushort GAMEBOX_W = 65;
+ushort GAMEBOX_Y = 5;
+ushort GAMEBOX_X = 8;
+ushort TEXTBOX_H = 8;
+ushort TEXTBOX_W = 65;
+ushort TEXTBOX_Y = 20;
+ushort TEXTBOX_X = 8;
 
 /* File to dump screen contents to */
 const char *DUMPFILE = cast(char *)".vscrdump";
