@@ -1,5 +1,8 @@
 module box;
 
+import core.thread : Thread;
+import core.time   : dur;
+
 import std.meta : Alias;
 
 import cs = deimos.curses;
@@ -33,11 +36,57 @@ class Box
 		cs.delwin(win);
 	}
 
-	void clear()
+	void clear() nothrow @nogc
 	{
 		cs.wclear(win); /* Clear window */
 		redraw(height, width,
                starty, startx); /* Redraw text box */
+	}
+
+	void newline() nothrow @nogc
+	{
+		int y, x;
+
+		cs.getyx(win, y, x);
+		cs.wmove(win, y + 1, 2);
+	}
+
+	/*
+	 * Display text using a typewriter-like text effect.
+	 */
+	void quote(string s, long interval = 30)
+	{
+		int i;
+		int y, x;
+	
+		cs.wmove(win, 1, 2);
+		for (i = 0; i < s.length; i++) {
+			if (s[i] == '\n') {
+				newline();
+				continue;
+			}
+			cs.getyx(win, y, x);
+			if (x + 3 == width) {
+				if (s[i] == ' ') {
+					cs.waddch(win, s[i]);
+					newline();
+					continue;
+				} else {
+					cs.waddch(win, '-');
+				}
+				newline();
+			}
+			cs.waddch(win, s[i]);
+			cs.wrefresh(win);
+			cs.flushinp();
+			Thread.sleep(dur!"msecs"(interval));
+		}
+	}
+	void quotew(string s, long interval = 30)
+	{
+		quote(s, interval);
+		while (cs.wgetch(win) != '\n') {}
+		clear();
 	}
 
 	void redraw(int height, int width, int starty, int startx) nothrow @nogc
@@ -49,8 +98,8 @@ class Box
 		/* set new positions */
 		this.starty = starty;
 		this.startx = startx;
-		this.endy = starty + height;
-		this.endx = startx + width;
+		this.endy = starty + height - 1;
+		this.endx = startx + width - 1;
 		this.height = height;
 		this.width = width;
 		/* create window */

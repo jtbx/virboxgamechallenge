@@ -45,8 +45,15 @@ class Entity
 	}
 	@property void x(int newVal) nothrow @nogc
 	{
+		int begx;
+		int maxx;
+
+		begx = cs.getbegx(_win);
+		maxx = cs.getmaxx(_win);
 		/* if the space is occupied, return */
-		if (cs.mvwinch(_win, _y, newVal) != ' ') {
+		if (cs.mvwinch(_win, _y, newVal) != ' ' ||
+		newVal + 2 == maxx ||
+		newVal - 1 == 0) {
 			return;
 		}
 		cs.mvwaddch(_win, _y, _x, ' '); /* remove character */

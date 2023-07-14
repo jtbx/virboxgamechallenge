@@ -14,9 +14,7 @@ import cs = deimos.curses;
 
 import box;    /* Box class */
 import entity; /* Entity class */
-
-alias stdscr = cs.stdscr;
-alias ColourPair = cs.COLOR_PAIR;
+import util;   /* utility functions, ColourPair alias and stdscr alias */
 
 enum Key
 {
@@ -75,53 +73,13 @@ int main(string[] args)
 		game.destroy();
 		text.destroy();
 		endCurses();
-		stderr.writefln("%s: %s", args[0].baseName(), format(fmt, a));
+		stderr.writefln("%s: %s", baseName(args[0]), fmt.format(a));
 
 		scope (exit) {
 			Runtime.terminate();
 			exit(1);
 		}
 	}
-
-	void checkDimensions()
-	{
-		int rows, cols;
-
-		cs.getmaxyx(cs.stdscr, rows, cols); /* get terminal size */
-		/* if the screen state has not been dumped
-		 * AND the terminal is too small: */
-		if (!dumped && (rows < MINROWS || cols < MINCOLS)) {
-			cs.scr_dump(DUMPFILE); /* dump screen to file */
-			dumped = true;
-			cs.attron(ColourPair(1)); /* enable white-on-red palette */
-			cs.mvprintw(0, 0, "terminal size too small (%d x %d)", cols, rows);
-			cs.mvprintw(1, 0, "must be at least %d columns by %d rows",
-				MINCOLS, MINROWS);
-			cs.attroff(ColourPair(1)); /* disable palette */
-			cs.refresh();
-		/* else, if the screen state HAS been dumped
-		   AND the temrinal is still too small */
-		} else if (dumped && (rows < MINROWS || cols < MINCOLS)) {
-			/* print the message again */
-			cs.attron(ColourPair(1)); /* enable white-on-red palette */
-			cs.mvprintw(0, 0, "terminal size too small (%d x %d)", cols, rows);
-			cs.mvprintw(1, 0, "must be at least %d columns by %d rows",
-				MINCOLS, MINROWS);
-			cs.attroff(ColourPair(1)); /* disable palette */
-			cs.refresh();
-		/* else, if the screen state HAS been dumped
-		   AND the terminal is a good size */
-		} else if (dumped && (rows >= MINROWS || cols >= MINCOLS)) {
-			/* restore screen state */
-			cs.scr_restore(DUMPFILE); /* restore screen from file */
-			cs.use_default_colors();
-			cs.refresh();
-			remove(DUMPFILE.to!string()); /* remove the dump file */
-			dumped = false;
-		}
-	}
-
-	dumped = false;
 
 	if (!isatty(1)) {
 		panic("output is not to a terminal; cannot continue");
@@ -145,11 +103,19 @@ int main(string[] args)
 	/* colour pairs */
 	cs.init_pair(1, Colour.WHITE, Colour.RED);
 
-	checkDimensions();
+	checkDimensions(MINCOLS, MINROWS, DUMPFILE, dumped);
 
 	game = new Box(GAMEBOX_H, GAMEBOX_W, GAMEBOX_Y, GAMEBOX_X);
 	text = new Box(TEXTBOX_H, TEXTBOX_W, TEXTBOX_Y, TEXTBOX_X);
-	player = new Entity(game.win, 2, 2, '+');
+	player = new Entity(game.win, 10, 20, '*');
+
+	text.quotew(
+"Welcome to virboxquest! We'll give you a quick tutorial.
+First, move your character around using h, j, k and l,
+or you can use w, a, s, and d.
+Remove this text by pressing [Enter].
+");
+
 
 	do {
 		ch = cs.wgetch(game.win);
@@ -162,13 +128,13 @@ int main(string[] args)
 		 */
 		if (dumped) {
 			if (ch == Key.RESIZE) {
-				checkDimensions();
+				checkDimensions(MINCOLS, MINROWS, DUMPFILE, dumped);
 			}
 			continue;
 		}
 		switch (ch) {
 			case Key.RESIZE: /* on window resize */
-				checkDimensions();
+				checkDimensions(MINCOLS, MINROWS, DUMPFILE, dumped);
 				break;
 			case Key.UP:
 			case 'w':
@@ -183,16 +149,16 @@ int main(string[] args)
 			case Key.LEFT:
 			case 'a':
 			case 'h':
-				player.x = player.x - 1;
+				player.x = player.x - 2;
 				break;
 			case Key.RIGHT:
 			case 'd':
 			case 'l':
-				player.x = player.x + 1;
+				player.x = player.x + 2;
 				break;
 			case 'q': /* quit key */
 				text.clear();
-				cs.mvwprintw(text.win, 1, 2, "Are you sure you want to quit? [Y/N]");
+				text.quote("Are you sure you want to quit? ", 20);
 				cs.curs_set(1); /* show cursor */
 				tmp = cs.wgetch(text.win);
 				if (tmp == 'y' || tmp == 'Y') {
@@ -216,11 +182,4 @@ int main(string[] args)
 	endCurses();
 
 	return 0;
-}
-
-/* destruct ncurses */
-void endCurses() nothrow @nogc
-{
-	cs.refresh();
-	cs.endwin();
 }

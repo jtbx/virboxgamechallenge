@@ -4,7 +4,7 @@ PREFIX    = /usr/local
 DC      = ldc2
 CFLAGS  = -O0 -gc -I${IMPORT} -release -wi
 LDFLAGS = -L-lncurses -L-ltinfo
-OBJS    = main.o box.o entity.o
+OBJS    = main.o box.o entity.o util.o
 
 all: virboxquest
 
@@ -17,6 +17,8 @@ box.o: box.d
 	${DC} ${CFLAGS} -of$@ -c box.d
 entity.o: entity.d
 	${DC} ${CFLAGS} -of$@ -c entity.d
+util.o: util.d
+	${DC} ${CFLAGS} -of$@ -c util.d
 
 clean:
 	rm -f virboxquest ${OBJS}
