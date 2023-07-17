@@ -1,7 +1,7 @@
 module entity;
 
 import std.meta : Alias;
-import cs = deimos.ncurses;
+import cs = deimos.curses;
 
 alias Window = Alias!(cs.WINDOW *);
 
