@@ -107,7 +107,7 @@ int main(string[] args)
 
 	game = new Box(GAMEBOX_H, GAMEBOX_W, GAMEBOX_Y, GAMEBOX_X);
 	text = new Box(TEXTBOX_H, TEXTBOX_W, TEXTBOX_Y, TEXTBOX_X);
-	player = new Entity(game.win, 10, 20, '*');
+	player = new Entity(game.win, 12, 60, '*');
 
 	text.quotew(
 "Welcome to virboxquest! We'll give you a quick tutorial.
@@ -115,6 +115,12 @@ First, move your character around using h, j, k and l,
 or you can use w, a, s, and d.
 Remove this text by pressing [Enter].
 ");
+
+	game.map([
+	"               |",
+	" &       &     |",
+	"______  _______/",
+	]);
 
 
 	do {

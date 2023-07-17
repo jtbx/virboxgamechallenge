@@ -27,6 +27,7 @@ class Box
 		/* create window */
 		win = cs.newwin(height, width, starty, startx);
 		cs.box(win, 0, 0); /* make a box border */
+		cs.keypad(win, 1); /* catch F* and arrow key characters */
 		cs.wrefresh(win);
 	}
 	~this() nothrow @nogc
@@ -41,6 +42,17 @@ class Box
 		cs.wclear(win); /* Clear window */
 		redraw(height, width,
                starty, startx); /* Redraw text box */
+	}
+
+	void map(string[] charmap) nothrow @nogc
+	{
+		int i, j;
+
+		for (i = 0; i < charmap.length; i++) {
+			for (j = 0; j < charmap[i].length; j++) {
+				cs.mvwaddch(win, i + 1, j + 2, charmap[i][j]);
+			}
+		}
 	}
 
 	void newline() nothrow @nogc

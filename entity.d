@@ -52,6 +52,7 @@ class Entity
 		maxx = cs.getmaxx(_win);
 		/* if the space is occupied, return */
 		if (cs.mvwinch(_win, _y, newVal) != ' ' ||
+		cs.mvwinch(_win, _y, (newVal + _x) / 2) != ' ' ||
 		newVal + 2 == maxx ||
 		newVal - 1 == 0) {
 			return;
