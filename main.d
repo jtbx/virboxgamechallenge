@@ -13,7 +13,7 @@ import std.traits : isSomeString;
 import cs = deimos.curses;
 
 import box;    /* Box class */
-import entity; /* Entity class */
+import player; /* Player class */
 import util;   /* utility functions, ColourPair alias and stdscr alias */
 
 enum Key
@@ -60,7 +60,7 @@ int main(string[] args)
 	int  ch, tmp;
 	Box    game;
 	Box    text;
-	Entity player;
+	Player player;
 
     void panic(R, A...)(R fmt, A a)
     if (isSomeString!R)
@@ -107,7 +107,16 @@ int main(string[] args)
 
 	game = new Box(GAMEBOX_H, GAMEBOX_W, GAMEBOX_Y, GAMEBOX_X);
 	text = new Box(TEXTBOX_H, TEXTBOX_W, TEXTBOX_Y, TEXTBOX_X);
-	player = new Entity(game.win, 12, 60, '*');
+	player = new Player(game.win, 12, 60, '*');
+
+	game.map([
+	`   _______`,
+	`  | farm  |`,
+	`  |_______|    0   0   0   0   0`,
+	`      |        |   |   |   |   |`,
+	`           *   0   0   0   0   0`,                
+	`               |   |   |   |   | `
+	]);
 
 	text.quotew(
 "Welcome to virboxquest! We'll give you a quick tutorial.
@@ -115,12 +124,6 @@ First, move your character around using h, j, k and l,
 or you can use w, a, s, and d.
 Remove this text by pressing [Enter].
 ");
-
-	game.map([
-	"               |",
-	" &       &     |",
-	"______  _______/",
-	]);
 
 
 	do {
@@ -145,22 +148,22 @@ Remove this text by pressing [Enter].
 			case Key.UP:
 			case 'w':
 			case 'k':
-				player.y = player.y - 1;
+				player.moveUp();
 				break;
 			case Key.DOWN:
 			case 's':
 			case 'j':
-				player.y = player.y + 1;
+				player.moveDown();
 				break;
 			case Key.LEFT:
 			case 'a':
 			case 'h':
-				player.x = player.x - 2;
+				player.moveLeft();
 				break;
 			case Key.RIGHT:
 			case 'd':
 			case 'l':
-				player.x = player.x + 2;
+				player.moveRight();
 				break;
 			case 'q': /* quit key */
 				text.clear();
