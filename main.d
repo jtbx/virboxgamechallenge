@@ -164,7 +164,7 @@ Remove this text by pressing [Enter].
 				break;
 			case 'q': /* quit key */
 				text.clear();
-				text.quote("Are you sure you want to quit? [Y/N] ", 20);
+				text.quote("Are you sure you want to quit? ", 20);
 				cs.curs_set(1); /* show cursor */
 				tmp = cs.wgetch(text.win);
 				if (tmp == 'y' || tmp == 'Y') {
