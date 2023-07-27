@@ -53,6 +53,7 @@ class Box
 				cs.mvwaddch(win, i + 1, j + 2, charmap[i][j]);
 			}
 		}
+		cs.wrefresh(win);
 	}
 
 	void newline() nothrow @nogc
@@ -66,7 +67,7 @@ class Box
 	/*
 	 * Display text using a typewriter-like text effect.
 	 */
-	void quote(string s, long interval = 30)
+	void quote(string s, long interval = 20)
 	{
 		int i;
 		int y, x;
@@ -94,7 +95,7 @@ class Box
 			Thread.sleep(dur!"msecs"(interval));
 		}
 	}
-	void quotew(string s, long interval = 30)
+	void quotew(string s, long interval = 20)
 	{
 		quote(s, interval);
 		while (cs.wgetch(win) != '\n') {}

@@ -1,0 +1,20 @@
+My entry to the 1st Virbox coding challenge.
+
+This is a simple text-based game that runs in
+your terminal using the curses library, which
+helps make games like these. For more information,
+see the commment at the top of main.d.
+
+To play this game, you need to first compile it.
+Since it is written in D, you must install make
+and ldc (the LLVM D compiler) first. Both should
+be in most Linux package repositories. If you're
+using Nix, you can enter a temporary shell with
+all required dependencies by running `nix-shell`.
+
+To build, run `make` in the directory with the
+source code. The resulting executable will be
+called "virboxquest". To run it, just type
+`./virboxquest` into your shell.
+
+- Jeremy

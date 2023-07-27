@@ -1,8 +1,7 @@
 IMPORT    = import
-PREFIX    = /usr/local
 
 DC      = ldc2
-CFLAGS  = -O0 -gc -I${IMPORT} -release -wi
+CFLAGS  = -O2 -I${IMPORT} -release
 LDFLAGS = -L-lncurses -L-ltinfo
 OBJS    = main.o box.o player.o util.o
 

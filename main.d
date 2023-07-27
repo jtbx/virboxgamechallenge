@@ -1,3 +1,27 @@
+/*
+ * My entry to the 1st Virbox coding challenge.
+ * It draws a couple of windows onto the terminal
+ * using curses, and then draws the player and the
+ * map onto the screen. Very incomplete, at least
+ * the movement system works. There is also a basic
+ * mapping "system" (basically just a function in
+ * the Box class) which allows an array of strings
+ * to be placed over the game window. Very handy
+ * and I like it. I might reuse this code some
+ * other time but for now this is all I got. o7
+ *
+ * Use HJKL, WASD or the arrow keys to move the
+ * character around the screen. The character
+ * will not move if there is an obstacle in the
+ * way, such as another character or a window
+ * border. A "window" in curses terms means a
+ * container which you can draw text into.
+ *
+ * Licensed under the GNU General Public License,
+ * version 2. See the COPYING file included for
+ * the full license.
+ */
+
 import core.sys.posix.unistd : isatty;
 
 import std.algorithm.comparison : clamp;
@@ -110,12 +134,12 @@ int main(string[] args)
 	player = new Player(game.win, 12, 60, '*');
 
 	game.map([
-	`   _______`,
-	`  | farm  |`,
-	`  |_______|    0   0   0   0   0`,
-	`      |        |   |   |   |   |`,
-	`           *   0   0   0   0   0`,                
-	`               |   |   |   |   | `
+	`  `,
+	`   _______ `,
+	`  /virbox \   0   0   0   0   0`,
+	`  | farms |   |   |   |   |   |`,
+	`  |_______|   0   0   0   0   0`,                
+	`     |_|      |   |   |   |   | `
 	]);
 
 	text.quotew(
